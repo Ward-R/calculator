@@ -1,0 +1,32 @@
+
+
+
+.calculator {
+    border: 2px dotted aqua;
+    display: flex;
+    flex-wrap: wrap;
+    width: 180px;
+    height: auto;
+}
+
+.buttons {
+    border: 2px dotted aqua;
+    display: flex;
+    flex-wrap: wrap;
+    width: 180px;
+    height: auto;
+}
+
+.buttons button {
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 2px;
+}
+
+#buttonEquals {
+    width: 84px;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 2px;
+}
