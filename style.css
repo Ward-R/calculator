@@ -1,32 +1,52 @@
 
-
+html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: antiquewhite;
+}
 
 .calculator {
-    border: 2px dotted aqua;
+    border: 2px solid rgb(0, 0, 0);
     display: flex;
     flex-wrap: wrap;
-    width: 180px;
+    width: 260px;
     height: auto;
+    background-color: rgb(62, 62, 61);
+    
 }
 
 .buttons {
-    border: 2px dotted aqua;
+    border: 2px solid rgb(0, 0, 0);
     display: flex;
     flex-wrap: wrap;
-    width: 180px;
+    width: 260px;
     height: auto;
+    background-color: rgb(62, 62, 61);
 }
 
 .buttons button {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     box-sizing: border-box;
     margin: 2px;
 }
 
+#display {
+    border: 2px solid rgb(0, 0, 0);
+    width: 254px;
+    height: 60px;
+    margin: 2px;
+    box-sizing: border-box;
+
+}
+
 #buttonEquals {
-    width: 84px;
-    height: 40px;
+    width: 124px;
+    height: 60px;
     box-sizing: border-box;
     margin: 2px;
 }
