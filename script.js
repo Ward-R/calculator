@@ -26,7 +26,7 @@ function operate(number1, number2, operator) {
             result = (number1 % number2)
         break;
     }
-    return result
+    return parseFloat(result.toFixed(5)) // Rounds result from high decimal divison result. toFixed returns string, so made float again.
 }
 
 const display = document.getElementById("display");
