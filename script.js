@@ -7,30 +7,26 @@
 // Calculation logic:
 function operate(number1, number2, operand) {
     result = null;
-    //a = parseInt(number1);
-    //b = parseInt(number2);
-    a = number1; // as int
-    b = number2; // as int
     switch(operand) {
         case "+":
-            result = (a + b);
+            result = (number1 + number2);
         break;
         case "-":
-            result = (a - b);
+            result = (number1 - number2);
         break;
         case "*":
-            result = (a * b);
+            result = (number1 * number2);
         break;
         case "/":
-            if (b === 0) {
+            if (number2 === 0) {
                 result = "Are you dumb?! You can't divide by 0!";
             }
             else {
-                result = (a / b);
+                result = (number1 / number2);
             }
         break;
         case "%":
-            result = (a % b)
+            result = (number1 % number2)
         break;
     }
     return result
@@ -42,7 +38,6 @@ const buttons = document.querySelector(".buttons"); // Use querySelector
 let number1 = null;  
 let number2 = null;
 let operand = null;
-operandPressed = false;
 numberEnteredLast = false;
 
 if (buttons && display) {
@@ -58,98 +53,134 @@ if (buttons && display) {
                     number1 = null;
                     number2 = null;
                     operand = null;
-                    operandPressed = false;
                     numberEnteredLast = false;
                     break;
-                // case "buttonPlus":
-                //     if (numberEnteredLast === true) {  // only works if a number entry preceeds operand. operand operand does nothing.
-                //         number1 = parseFloat(display.value);
-                //         operand = "+";
-                //         //display.value = "";
-                //         if (operandPressed === true) {  // need to get this to mimic equals button logic to get rid of number 1 from screen.
-                //             number2 = parseFloat(display.value);
-                //             result = operate(number1, number2, operand);
-                //             display.value = result;
-                //             number1 = result;
-                //         }
-                //         operandPressed = true;
-                //         numberEnteredLast = false; // **** trying to get it to not allow operand pushed twice in a row
-                //     }
-                //     break;
-                case "buttonPlus":  //***** I realized that operandpressd and numberenteredlast are opposites doing the same fucking thing. refactor after to only use one or the other... get rid of operandpressed */
-                    
-                    if (numberEnteredLast === true && number1 !== null && operandPressed === false) {
+                case "buttonPlus":  
+                    if (numberEnteredLast === true && number1 !== null) { // case if entering a 3rd or more number
+                        
+                        number2 = parseFloat(display.value);
+                       // operand = "+";                     bug if switching 1 + 2 - 2, etc.
+                        result = operate(number1, number2, operand);
+                        display.value = result;
+                        number1 = result;
+                        numberEnteredLast = false;   
+                        console.log("+operator", operand);
+                        console.log("plus if:", display.value);
+                        console.log("+number1:", number1);
+                        console.log("+number2:", number2);
+                        console.log("result:", result);
+                    }
+                    else if (numberEnteredLast === false) {  // if operator entered twice or more in a row does nothing/ changes operator.
+                        operand = "+";
+                        console.log("operator", operand);
+                        console.log("plus else if nel===f:", display.value);
+                        console.log("+number1:", number1);
+                        console.log("+number2:", number2);
+                    }
+                    else if (numberEnteredLast === true) {  // case if only two number calculation
+                        number1 = parseFloat(display.value);
+                        operand = "+";
+                        numberEnteredLast = false;
+                        console.log("+plus else if:", display.value);
+                        console.log("+number1:", number1);
+                        console.log("+number2:", number2);
+                    }
+                    break;
+                case "buttonMinus":
+                    if (numberEnteredLast === true && number1 !== null) {
+                        
+                        console.log("operator -", operand);
+                        number2 = parseFloat(display.value);
+                        //operand = "-";
+                        result = operate(number1, number2, operand);
+                        display.value = result;
+                        number1 = result;
+                        numberEnteredLast = false;   
+                    }
+                    else if (numberEnteredLast === false) { 
+                        operand = "-";
+                    }
+                    else if (numberEnteredLast === true) {  
+                        number1 = parseFloat(display.value);
+                        operand = "-";
+                        numberEnteredLast = false;
+                    }
+                    break;
+                case "buttonDivide":
+                    if (numberEnteredLast === true && number1 !== null) {
                         number2 = parseFloat(display.value);
                         result = operate(number1, number2, operand);
                         display.value = result;
                         number1 = result;
-                        numberEnteredLast = false; // **** trying to get it to not allow operand pushed twice in a row
-                        
-                        console.log("plus if:", display.value);
-                        console.log("number1:", number1);
-                        console.log("number2:", number2);
-                        console.log("result:", result);
-                    
+                        numberEnteredLast = false;   
                     }
                     else if (numberEnteredLast === false) { 
-                        operand = "+";
-                        console.log("plus else if nel===f:", display.value);
-                        console.log("number1:", number1);
-                        console.log("number2:", number2);
+                        operand = "/";
                     }
                     else if (numberEnteredLast === true) {  
                         number1 = parseFloat(display.value);
-                        operand = "+";
+                        operand = "/";
                         numberEnteredLast = false;
-                        console.log("plus else if:", display.value);
-                        console.log("number1:", number1);
-                        console.log("number2:", number2);
                     }
-                    
-                    break;
-                case "buttonMinus":
-                    number1 = parseFloat(display.value); //this works only for two number situations.
-                    operand = "-";
-                    numberEnteredLast = false;
-                    console.log("minus:", display.value);
-                    console.log("number1:", number1);
-                    console.log("number2:", number2);
-                    break;
-                case "buttonDivide":
-                    number1 = display.value;
-                    operand = "/"
                     break;
                 case "buttonMultiply":
-                    number1 = display.value;
-                    operand = "*"
+                    if (numberEnteredLast === true && number1 !== null) {
+                        number2 = parseFloat(display.value);
+                        result = operate(number1, number2, operand);
+                        display.value = result;
+                        number1 = result;
+                        numberEnteredLast = false;   
+                    }
+                    else if (numberEnteredLast === false) { 
+                        operand = "*";
+                    }
+                    else if (numberEnteredLast === true) {  
+                        number1 = parseFloat(display.value);
+                        operand = "*";
+                        numberEnteredLast = false;
+                    }
                     break;
                 case "buttonModulus":
-                    number1 = display.value;
-                    operand = "%"
+                    if (numberEnteredLast === true && number1 !== null) {
+                        number2 = parseFloat(display.value);
+                        result = operate(number1, number2, operand);
+                        display.value = result;
+                        number1 = result;
+                        numberEnteredLast = false;   
+                    }
+                    else if (numberEnteredLast === false) { 
+                        operand = "%";
+                    }
+                    else if (numberEnteredLast === true) {  
+                        number1 = parseFloat(display.value);
+                        operand = "%";
+                        numberEnteredLast = false;
+                    }
                     break;                
                 case "buttonPosNeg": // Plus/Minus
                     let currentValue = parseFloat(display.value);
                     display.value = -currentValue; // Toggle sign
                 break;
                 case "buttonEquals":
-                    number2 = parseFloat(display.value);
-                    result = operate(number1, number2, operand);
-                    display.value = result;
-                    number1 = result;
-                    numberEnteredLast = false;
-                    operandPressed = true;
-                    console.log("equals result:", result);
-                    console.log("number1:", number1);
-                    console.log("number2:", number2);
+                    if (numberEnteredLast === true) {
+                        number2 = parseFloat(display.value);
+                        result = operate(number1, number2, operand);
+                        display.value = result;
+                        number1 = result;
+                        numberEnteredLast = false;
+                    }
+                    else if (numberEnteredLast === false) { // Prevents '=' from activating multiple times in a row.
+                        operand = "=";
+                    }
                     break;
                 default: // numbers
                     if (display.value === "0") {
-                        display.value = buttonValue; // Replace initial "0"
+                        display.value = buttonValue; // Replace initial "0" with first digit entered
                         numberEnteredLast = true;
                         console.log("numbers if:", display.value);
                         console.log("number1:", number1);
                         console.log("number2:", number2);
-                    } else if (parseFloat(display.value) === number1) { // clears screen to display number2 entry
+                    } else if (parseFloat(display.value) === number1) { // clears screen then displays number2 entry
                         display.value = "";
                         display.value = buttonValue;
                         numberEnteredLast = true;
@@ -157,7 +188,7 @@ if (buttons && display) {
                         console.log("number1:", number1);
                         console.log("number2:", number2);
                     } else {
-                        display.value += buttonValue; // This is for displaying the first number only
+                        display.value += buttonValue; // This is for displaying the number1 only
                         numberEnteredLast = true;
                         console.log("numbers else:", display.value);
                         console.log("number1:", number1);
@@ -170,6 +201,3 @@ if (buttons && display) {
     console.error("Button container not found!");
 }
 
-//The Crucial Limitation (and Bug):
-
-//The problem is that this approach only works correctly if the user immediately starts entering the second number after entering the operator.  If the user enters the operator and then accidentally presses a number key before starting the second number (for instance, they meant to press another operator), your logic will clear the display incorrectly.
