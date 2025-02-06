@@ -16,7 +16,7 @@ html, body {
     width: 260px;
     height: auto;
     background-color: rgb(62, 62, 61);
-    
+    border-radius: 5px;
 }
 
 .buttons {
@@ -26,6 +26,8 @@ html, body {
     width: 260px;
     height: auto;
     background-color: rgb(62, 62, 61);
+    border-top: 10px;
+    
 }
 
 .buttons button {
@@ -33,6 +35,13 @@ html, body {
     height: 60px;
     box-sizing: border-box;
     margin: 2px;
+    border-radius: 5px;
+    background-color: rgb(225, 225, 225);
+    border-color: black;
+    border-width: 3px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: roboto;
 }
 
 #display {
@@ -41,7 +50,12 @@ html, body {
     height: 60px;
     margin: 2px;
     box-sizing: border-box;
-
+    border-radius: 5px;
+    background-color: rgb(183, 247, 255);
+    border-width: 2px;
+    font-size: 28px;
+    font-family: roboto;
+    
 }
 
 #buttonEquals {
@@ -49,4 +63,10 @@ html, body {
     height: 60px;
     box-sizing: border-box;
     margin: 2px;
+    border-radius: 5px;
+    background-color: rgb(172, 172, 172);
+}
+
+#buttonAC {
+    background-color: rgb(255, 171, 171);
 }
